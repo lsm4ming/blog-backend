@@ -17,5 +17,4 @@ add_subdirectory(third_party)
 
 add_executable(blog-backend main.cpp ${CPP_SOURCES})
 
-target_include_directories(blog-backend PRIVATE cpp-tools/includes)
-target_link_directories(blog-backend PRIVATE cpp-tools)
+target_link_libraries(blog-backend PRIVATE cpptools)
