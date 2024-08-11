@@ -36,5 +36,13 @@ namespace blog_backend::model
         bsoncxx::document::view view = result->view();
         return view["last_id"].get_int64().value;
     }
+
+    bsoncxx::builder::stream::document PrimaryKey::toDocument() const
+    {
+        auto document = this->getModelDocument();
+        document << "last_id" << this->lastId
+                 << "table_name" << this->tableName;
+        return document;
+    }
 }
 

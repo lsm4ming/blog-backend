@@ -14,6 +14,18 @@ namespace blog_backend::model
         static PrimaryKeyModel primaryKeyModel;
         return primaryKeyModel;
     }
+
+    static PageHeaderModel &getPageHeaderModel()
+    {
+        static PageHeaderModel pageHeaderModel;
+        return pageHeaderModel;
+    }
+
+    static StatisticModel &getStatisticModel()
+    {
+        static StatisticModel statisticModel;
+        return statisticModel;
+    }
 }
 
 #endif //BLOG_BACKEND_MODELS_H

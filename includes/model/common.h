@@ -31,9 +31,15 @@ namespace blog_backend::model
     class Model
     {
     public:
-        int64_t id;
+        int64_t id{};
         String createdAt;
         String updatedAt;
+
+        virtual bsoncxx::builder::stream::document toDocument() const = 0;
+
+        bsoncxx::builder::stream::document getModelDocument() const;
+
+        static bsoncxx::types::b_date convertStringToBdate(const String& date) ;
     };
 
     class MongoModel
@@ -48,7 +54,23 @@ namespace blog_backend::model
 
         virtual String tableName() = 0;
 
-        auto insert(const bsoncxx::builder::stream::document &document);
+        auto insert(const Model &model);
+
+        auto batchInsert(const Vector<bsoncxx::builder::stream::document>& list);
+
+        auto update(int64_t id, const bsoncxx::builder::stream::document &document);
+
+        auto deleteOne(int64_t id);
+
+        auto deleteMany(const bsoncxx::builder::stream::document &filter);
+
+        mongocxx::stdx::optional<bsoncxx::document::value> findOne(int64_t id);
+
+        mongocxx::cursor find(const bsoncxx::builder::stream::document &filter);
+
+        void customOperator(const Function<void(mongocxx::collection&)>& func);
+
+        int64_t countDocuments(const bsoncxx::builder::stream::document &filter);
     };
 
     extern void initMongodb(blog_backend::config::Config &c);

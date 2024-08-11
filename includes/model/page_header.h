@@ -14,6 +14,8 @@ namespace blog_backend::model
     public:
         String routeName;
         String bgUrl;
+
+        bsoncxx::builder::stream::document toDocument() const override;
     };
 
     class PageHeaderModel : public MongoModel

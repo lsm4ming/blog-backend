@@ -5,11 +5,38 @@
 
 namespace blog_backend::model
 {
-    class Statistic
+    class Statistic : public Model
     {
     public:
-        long id;
-        std::string name;
+        // 文章数量
+        int64_t articleCount{};
+        // 评论数量
+        int64_t commentCount{};
+        // 分类数量
+        int64_t categoryCount{};
+        // 标签数量
+        int64_t tagCount{};
+        // 访问数量
+        int64_t visitCount{};
+
+        /**
+         * 转换为bson
+         * @return
+         */
+        bsoncxx::builder::stream::document toDocument() const override;
+    };
+
+    class StatisticModel : public MongoModel
+    {
+    public:
+        /**
+         * 增加统计数据
+         * @param statistic
+         * @return
+         */
+        auto incrementStatistic(const Statistic &statistic);
+
+        String tableName() override;
     };
 }
 

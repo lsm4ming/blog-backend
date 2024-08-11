@@ -8,9 +8,10 @@ namespace blog_backend::model
     class PrimaryKey : public Model
     {
     public:
-        int64_t id;
         String tableName;
-        int64_t lastId;
+        int64_t lastId{};
+
+        [[nodiscard]] bsoncxx::builder::stream::document toDocument() const override;
     };
 
     class PrimaryKeyModel : public MongoModel
