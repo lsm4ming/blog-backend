@@ -1,10 +1,12 @@
 #ifndef BLOG_BACKEND_PAGE_HEADER_H
 #define BLOG_BACKEND_PAGE_HEADER_H
 
-#include "common.h"
+#include "models.h"
 
 namespace blog_backend::model
 {
+    using namespace cpptools::common;
+
     class PageHeader : public Model
     {
     public:

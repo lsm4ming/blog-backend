@@ -1,10 +1,12 @@
 #ifndef BLOG_BACKEND_STATISTIC_H
 #define BLOG_BACKEND_STATISTIC_H
 
-#include "common.h"
+#include "models.h"
 
 namespace blog_backend::model
 {
+    using namespace cpptools::common;
+
     class Statistic : public Model
     {
     public:
@@ -23,7 +25,7 @@ namespace blog_backend::model
          * 转换为bson
          * @return
          */
-        bsoncxx::builder::stream::document toDocument() const override;
+        [[nodiscard]] bsoncxx::builder::stream::document toDocument() const override;
     };
 
     class StatisticModel : public MongoModel
@@ -34,7 +36,7 @@ namespace blog_backend::model
          * @param statistic
          * @return
          */
-        auto incrementStatistic(const Statistic &statistic);
+        FindOneResult incrementStatistic(const Statistic &statistic);
 
         String tableName() override;
     };

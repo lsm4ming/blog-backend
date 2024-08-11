@@ -18,7 +18,7 @@ namespace blog_backend::model
         return "statistic";
     }
 
-    auto StatisticModel::incrementStatistic(const Statistic &statistic)
+    FindOneResult StatisticModel::incrementStatistic(const Statistic &statistic)
     {
         auto collection = this->getCollection();
         using bsoncxx::builder::stream::document;

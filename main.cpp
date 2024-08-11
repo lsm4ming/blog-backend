@@ -3,8 +3,8 @@
 #include <cpptools/common/config.h>
 #include <cpptools/http/httpserver.h>
 #include "config/config.h"
-#include "model/page_header.h"
 #include "controller/route.h"
+#include "model/common.h"
 
 constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 

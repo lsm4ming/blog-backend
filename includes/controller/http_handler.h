@@ -6,9 +6,9 @@
 
 namespace blog_backend::controller
 {
-    void ping(const cpptools::http::Request& request, cpptools::http::HttpResponseWriter& response);
+    extern void ping(const cpptools::http::Request& request, cpptools::http::HttpResponseWriter& response);
 
-    void queryBlogCategory(const cpptools::http::Request& request, cpptools::http::HttpResponseWriter& response);
+    extern void queryBlogCategory(const cpptools::http::Request& request, cpptools::http::HttpResponseWriter& response);
 }
 
 #endif //BLOG_BACKEND_HTTP_HANDLER_H

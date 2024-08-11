@@ -1,16 +1,17 @@
 #ifndef BLOG_BACKEND_CATEGORY_H
 #define BLOG_BACKEND_CATEGORY_H
 
-#include <string>
-#include "common.h"
+#include "models.h"
 
 namespace blog_backend::model
 {
+    using namespace cpptools::common;
+
     class Category
     {
     public:
         long id;
-        std::string name;
+        String name;
     };
 }
 

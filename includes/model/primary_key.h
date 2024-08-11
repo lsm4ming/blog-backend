@@ -1,10 +1,12 @@
 #ifndef BLOG_BACKEND_PRIMARY_KEY_H
 #define BLOG_BACKEND_PRIMARY_KEY_H
 
-#include "common.h"
+#include "models.h"
 
 namespace blog_backend::model
 {
+    using namespace cpptools::common;
+
     class PrimaryKey : public Model
     {
     public:

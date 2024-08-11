@@ -3,7 +3,7 @@
 #include <cpptools/common/config.h>
 #include <cpptools/time/time.h>
 #include "config/config.h"
-#include "model/models.h"
+#include "model/defined.h"
 #include "model/page_header.h"
 
 constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
