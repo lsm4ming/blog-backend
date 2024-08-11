@@ -4,7 +4,7 @@
 #include <cpptools/common/config.h>
 #include "controller/route.h"
 #include "config/config.h"
-#include "model/common.h"
+#include "model/models.h"
 
 constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 
