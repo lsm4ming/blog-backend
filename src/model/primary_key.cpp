@@ -23,7 +23,6 @@ namespace blog_backend::model
                 << bsoncxx::builder::stream::close_document
                 << finalize;
 
-        // find_one_and_update
         mongocxx::options::find_one_and_update update_opts;
         update_opts.return_document(mongocxx::options::return_document::k_after);
         update_opts.upsert(true);

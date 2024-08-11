@@ -19,8 +19,9 @@ add_subdirectory(third_party)
 
 add_executable(blog-backend main.cpp ${CPP_SOURCES})
 
-target_link_libraries(blog-backend cpptools)
-
 # 导入mongodb驱动
 find_package(mongocxx REQUIRED)
-target_link_libraries(blog-backend mongo::mongocxx_static)
+target_link_libraries(blog-backend cpptools mongo::mongocxx_static)
+
+add_executable(insert-data-test tests/insert_data.cpp ${CPP_SOURCES})
+target_link_libraries(insert-data-test cpptools mongo::mongocxx_static)

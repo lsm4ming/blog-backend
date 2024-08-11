@@ -2,7 +2,7 @@
 
 namespace blog_backend::model
 {
-    std::once_flag init_flag;
+    HashMap<String, std::once_flag> init_flag_map;
 
     mongocxx::instance instance{};
 
@@ -25,20 +25,28 @@ namespace blog_backend::model
 
     mongocxx::collection MongoModel::getCollection()
     {
-        std::call_once(init_flag, [this]()
+//        auto t = init_flag_map.find(this->tableName());
+//        if (t == init_flag_map.end())
+//        {
+//            std::call_once(init_flag_map[this->tableName()], [this]()
+//            {
+//                this->db = globalClient[dbName];
+//            });
+//        }
+        std::call_once(init_flag_map[this->tableName()], [this]()
         {
             this->db = globalClient[dbName];
         });
         return this->db[this->tableName()];
     }
 
-    auto MongoModel::insert(const Model &model)
+    InsertOneResult MongoModel::insert(const Model &model)
     {
         auto collection = this->getCollection();
         return collection.insert_one(model.toDocument().view());
     }
 
-    auto MongoModel::update(int64_t id, const bsoncxx::builder::stream::document &document)
+    UpdateResult MongoModel::update(int64_t id, const bsoncxx::builder::stream::document &document)
     {
         auto collection = this->getCollection();
         bsoncxx::builder::stream::document filter;
@@ -46,7 +54,7 @@ namespace blog_backend::model
         return collection.update_one(filter.view(), document.view());
     }
 
-    auto MongoModel::deleteOne(int64_t id)
+    DeleteResult MongoModel::deleteOne(int64_t id)
     {
         auto collection = this->getCollection();
         bsoncxx::builder::stream::document filter;
@@ -54,13 +62,13 @@ namespace blog_backend::model
         return collection.delete_one(filter.view());
     }
 
-    auto MongoModel::deleteMany(const bsoncxx::builder::stream::document &filter)
+    DeleteResult MongoModel::deleteMany(const bsoncxx::builder::stream::document &filter)
     {
         auto collection = this->getCollection();
         return collection.delete_many(filter.view());
     }
 
-    mongocxx::stdx::optional<bsoncxx::document::value> MongoModel::findOne(int64_t id)
+    FindOneResult MongoModel::findOne(int64_t id)
     {
         auto collection = this->getCollection();
         bsoncxx::builder::stream::document filter;
@@ -68,7 +76,7 @@ namespace blog_backend::model
         return collection.find_one(filter.view());
     }
 
-    mongocxx::cursor MongoModel::find(const bsoncxx::builder::stream::document &filter)
+    FindResult MongoModel::find(const bsoncxx::builder::stream::document &filter)
     {
         auto collection = this->getCollection();
         return collection.find(filter.view());

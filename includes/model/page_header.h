@@ -1,7 +1,3 @@
-//
-// Created by Administrator on 2024-08-11.
-//
-
 #ifndef BLOG_BACKEND_PAGE_HEADER_H
 #define BLOG_BACKEND_PAGE_HEADER_H
 
@@ -15,7 +11,7 @@ namespace blog_backend::model
         String routeName;
         String bgUrl;
 
-        bsoncxx::builder::stream::document toDocument() const override;
+        [[nodiscard]] bsoncxx::builder::stream::document toDocument() const override;
     };
 
     class PageHeaderModel : public MongoModel
@@ -24,6 +20,5 @@ namespace blog_backend::model
         String tableName() override;
     };
 }
-
 
 #endif //BLOG_BACKEND_PAGE_HEADER_H

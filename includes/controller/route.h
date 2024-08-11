@@ -3,6 +3,7 @@
 
 #include <cpptools/http/httpserver.h>
 #include "http_handler.h"
+#include "config.h"
 
 using namespace cpptools::http;
 
