@@ -1,24 +1,42 @@
 #include <iostream>
 #include <cpptools/http/httpserver.h>
-#include "controller/http_handler.h"
+#include <cpptools/common/flag.h>
+#include <cpptools/common/config.h>
+#include "controller/route.h"
+#include "config/config.h"
+#include "model/common.h"
 
-constexpr const char *DEFAULT_HOST = "127.0.0.1";
-constexpr const char *DEFAULT_PORT = "8080";
+constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 
 using namespace cpptools::http;
+using namespace cpptools::common;
+
+void usage()
+{
+    std::cout << "Usage: -c [config path]" << std::endl;
+}
 
 int main(int argc, char *argv[])
 {
-    std::vector<std::string> args(argv, argv + argc);
-    if (argc < 3)
+    String cfgPath;
+    SetUsage(usage);
+    StrOpt(&cfgPath, "c", DEFAULT_CONFIG_PATH);
+    Parse(argc, argv);
+
+    IniConfig config;
+    if (!config.load(cfgPath))
     {
-        args.emplace_back(DEFAULT_HOST);
-        args.emplace_back(DEFAULT_PORT);
+        throw std::runtime_error("load config failed");
     }
-    HttpServer server(args[1], std::atoi(args[2].c_str()));
-    server.addRoute(HttpMethod::HTTP_GET, "/ping", blog_backend::controller::ping);
-    server.addRoute(HttpMethod::HTTP_GET, "/category", blog_backend::controller::queryBlogCategory);
-    server.addRoute(HttpMethod::HTTP_POST, "/category", blog_backend::controller::queryBlogCategory);
+    blog_backend::config::setConfig(config);
+    if (!blog_backend::config::checkConfig())
+    {
+        throw std::runtime_error("config check failed");
+    }
+    auto &c = blog_backend::config::getConfig();
+    HttpServer server(c.server.host, c.server.port);
+    blog_backend::controller::init(server);
+    blog_backend::model::initMongodb(c);
     server.start();
     return 0;
 }

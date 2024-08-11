@@ -2,6 +2,7 @@
 #define BLOG_BACKEND_CATEGORY_H
 
 #include <string>
+#include "common.h"
 
 namespace blog_backend::model
 {

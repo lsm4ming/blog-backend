@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.10)
 
 project(blog-backend)
 
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -17,4 +19,8 @@ add_subdirectory(third_party)
 
 add_executable(blog-backend main.cpp ${CPP_SOURCES})
 
-target_link_libraries(blog-backend PRIVATE cpptools)
+target_link_libraries(blog-backend cpptools)
+
+# 导入mongodb驱动
+find_package(mongocxx REQUIRED)
+target_link_libraries(blog-backend mongo::mongocxx_static)
