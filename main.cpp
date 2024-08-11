@@ -2,6 +2,7 @@
 #include <cpptools/common/flag.h>
 #include <cpptools/common/config.h>
 #include <cpptools/http/httpserver.h>
+#include <cpptools/log/log.h>
 #include "controller/route.h"
 #include "model/common.h"
 
@@ -9,6 +10,7 @@ constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 
 using namespace cpptools::http;
 using namespace cpptools::common;
+using namespace cpptools::log;
 
 void usage()
 {
@@ -25,6 +27,7 @@ int main(int argc, char *argv[])
     IniConfig config;
     if (!config.load(cfgPath))
     {
+        LOG_ERROR("load config failed, cfgPath: %s", cfgPath.c_str());
         throw std::runtime_error("load config failed");
     }
     blog_backend::config::setConfig(config);
