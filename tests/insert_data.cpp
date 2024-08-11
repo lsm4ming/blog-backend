@@ -2,7 +2,6 @@
 #include <cpptools/common/flag.h>
 #include <cpptools/common/config.h>
 #include <cpptools/time/time.h>
-#include "config/config.h"
 #include "model/defined.h"
 #include "model/page_header.h"
 

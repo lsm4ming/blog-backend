@@ -2,6 +2,9 @@
 
 namespace blog_backend::config
 {
+    constexpr const char *DEFAULT_HOST = "127.0.0.1";
+    constexpr const char *DEFAULT_PORT = "8080";
+
     Config &getConfig()
     {
         auto c = Singleton<Config>::getInstance();

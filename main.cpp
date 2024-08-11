@@ -2,7 +2,6 @@
 #include <cpptools/common/flag.h>
 #include <cpptools/common/config.h>
 #include <cpptools/http/httpserver.h>
-#include "config/config.h"
 #include "controller/route.h"
 #include "model/common.h"
 

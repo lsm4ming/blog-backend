@@ -1,4 +1,4 @@
-#ifndef BLOG_BACKEND_CONFIG_VIEW_H
+#ifndef BLOG_BACKEND_CONFIG_H
 
 #include <string>
 #include <cpptools/common/singleton.h>
@@ -6,9 +6,6 @@
 
 namespace blog_backend::config
 {
-    constexpr const char *DEFAULT_HOST = "127.0.0.1";
-    constexpr const char *DEFAULT_PORT = "8080";
-
     class serverConfig
     {
     public:
@@ -48,4 +45,4 @@ namespace blog_backend::config
     extern bool checkConfig();
 }
 
-#endif //BLOG_BACKEND_CONFIG_VIEW_H
+#endif // BLOG_BACKEND_CONFIG_H
