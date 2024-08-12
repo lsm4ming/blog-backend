@@ -3,8 +3,10 @@
 #include <cpptools/common/config.h>
 #include <cpptools/http/httpserver.h>
 #include <cpptools/log/log.h>
+#include "config/config.h"
 #include "controller/route.h"
 #include "model/common.h"
+#include "cache/redis.h"
 
 constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 
@@ -39,6 +41,7 @@ int main(int argc, char *argv[])
     HttpServer server(c.server.host, c.server.port);
     blog_backend::controller::init(server);
     blog_backend::model::initMongodb(c);
+    blog_backend::cache::initRedis(c);
     server.start();
     return 0;
 }

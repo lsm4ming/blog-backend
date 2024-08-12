@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef BLOG_BACKEND_CONFIG_H
 
 #include <string>

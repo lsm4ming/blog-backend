@@ -21,7 +21,13 @@ add_executable(blog-backend main.cpp ${CPP_SOURCES})
 
 # 导入mongodb驱动
 find_package(mongocxx REQUIRED)
-target_link_libraries(blog-backend cpptools mongo::mongocxx_static)
+# 导入mysql驱动
+find_package(libmysqlclient REQUIRED)
+# 导入redis驱动
+find_package(redis++ REQUIRED)
+
+target_link_libraries(blog-backend cpptools mongo::mongocxx_static libmysqlclient::libmysqlclient redis++::redis++_static)
 
 add_executable(insert-data-test tests/insert_data.cpp ${CPP_SOURCES})
+
 target_link_libraries(insert-data-test cpptools mongo::mongocxx_static)
