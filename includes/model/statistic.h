@@ -30,6 +30,14 @@ namespace blog_backend::model
 
     class StatisticModel : public MongoModel
     {
+    private:
+        explicit StatisticModel() = default;
+
+    public:
+        StatisticModel(const StatisticModel &) = delete;
+
+        StatisticModel &operator=(const StatisticModel &) = delete;
+
     public:
         /**
          * 增加统计数据
@@ -39,6 +47,12 @@ namespace blog_backend::model
         FindOneResult incrementStatistic(const Statistic &statistic);
 
         String tableName() override;
+
+        static StatisticModel *getInstance()
+        {
+            static StatisticModel statisticModel{};
+            return &statisticModel;
+        }
     };
 }
 

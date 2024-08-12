@@ -18,12 +18,6 @@ namespace blog_backend::model
         static PageHeaderModel pageHeaderModel;
         return pageHeaderModel;
     }
-
-    static StatisticModel &getStatisticModel()
-    {
-        static StatisticModel statisticModel;
-        return statisticModel;
-    }
 }
 
 #endif //BLOG_BACKEND_DEFINED_H

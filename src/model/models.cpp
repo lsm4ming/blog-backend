@@ -10,6 +10,10 @@ namespace blog_backend::model
         {
             this->db = globalClient[DB_NAME];
         });
+        if (!this->db)
+        {
+            throw std::runtime_error("Database not initialized.");
+        }
         return this->db[this->tableName()];
     }
 

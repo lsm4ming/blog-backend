@@ -18,12 +18,26 @@ namespace blog_backend::model
 
     class PrimaryKeyModel : public MongoModel
     {
+    private:
+        explicit PrimaryKeyModel() = default;
+
+    public:
+        PrimaryKeyModel(const PrimaryKeyModel &) = delete;
+
+        PrimaryKeyModel &operator=(const PrimaryKeyModel &) = delete;
+
     public:
         ~PrimaryKeyModel() override = default;
 
         int64_t generateId(const String &tableName);
 
         String tableName() override;
+
+        static PrimaryKeyModel *getInstance()
+        {
+            static PrimaryKeyModel primaryKeyModel{};
+            return &primaryKeyModel;
+        }
     };
 }
 

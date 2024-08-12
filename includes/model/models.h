@@ -16,7 +16,7 @@
 namespace blog_backend::model
 {
     using namespace cpptools::common;
-    
+
     using String = std::string;
     using InsertOneResult = mongocxx::stdx::optional<mongocxx::result::insert_one>;
     using UpdateResult = mongocxx::stdx::optional<mongocxx::result::update>;
@@ -44,7 +44,10 @@ namespace blog_backend::model
         mongocxx::database db;
 
     public:
-        virtual ~MongoModel() = default;
+        virtual ~MongoModel()
+        {
+            std::cout << "~MongoModel" << std::endl;
+        }
 
         mongocxx::collection getCollection();
 
@@ -52,7 +55,7 @@ namespace blog_backend::model
 
         InsertOneResult insert(const Model &model);
 
-        auto batchInsert(const Vector <bsoncxx::builder::stream::document> &list);
+        auto batchInsert(const Vector<bsoncxx::builder::stream::document> &list);
 
         UpdateResult update(int64_t id, const bsoncxx::builder::stream::document &document);
 

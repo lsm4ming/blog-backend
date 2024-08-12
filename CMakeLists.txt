@@ -30,4 +30,4 @@ target_link_libraries(blog-backend cpptools mongo::mongocxx_static libmysqlclien
 
 add_executable(insert-data-test tests/insert_data.cpp ${CPP_SOURCES})
 
-target_link_libraries(insert-data-test cpptools mongo::mongocxx_static)
+target_link_libraries(insert-data-test cpptools mongo::mongocxx_static libmysqlclient::libmysqlclient redis++::redis++_static)

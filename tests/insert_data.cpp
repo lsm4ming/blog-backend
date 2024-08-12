@@ -32,18 +32,18 @@ void insertPageHeader()
             std::pair<String, String>("Home", "http://img.mrzym.top/FvqmN1uzeffmGusWK8DvZj8IGaTi"),
     };
 
-    auto pageModel = blog_backend::model::getPageHeaderModel();
-    auto pkModel = blog_backend::model::getPrimaryKeyModel();
+    auto pageModel = blog_backend::model::PageHeaderModel::getInstance();
+    auto pkModel = blog_backend::model::PrimaryKeyModel::getInstance();
     for (auto &[k, v]: dataMap)
     {
         auto record = blog_backend::model::PageHeader();
         String now = cpptools::time::Time::now().format("%Y-%m-%d %H:%M:%S");
-        record.id = pkModel.generateId(pageModel.tableName());
+        record.id = pkModel->generateId(pageModel->tableName());
         record.bgUrl = v;
         record.routeName = k;
         record.createdAt = now;
         record.updatedAt = now;
-        pageModel.insert(record);
+        pageModel->insert(record);
     }
 }
 

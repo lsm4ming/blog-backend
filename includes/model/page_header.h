@@ -18,8 +18,22 @@ namespace blog_backend::model
 
     class PageHeaderModel : public MongoModel
     {
+    private:
+        explicit PageHeaderModel() = default;
+
+    public:
+        PageHeaderModel(const PageHeaderModel &) = delete;
+
+        PageHeaderModel &operator=(const PageHeaderModel &) = delete;
+
     public:
         String tableName() override;
+
+        static PageHeaderModel *getInstance()
+        {
+            static PageHeaderModel pageHeaderModel{};
+            return &pageHeaderModel;
+        }
     };
 }
 
