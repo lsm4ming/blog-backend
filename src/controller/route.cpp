@@ -12,5 +12,8 @@ namespace blog_backend::controller
         server.addRoute(HttpMethod::HTTP_PUT, "/api/config/addView", addView);
         server.addRoute(HttpMethod::HTTP_GET, "/api/statistic", queryStatistic);
         server.addRoute(HttpMethod::HTTP_GET, "/api/pageHeader/getAll", queryPageHeader);
+
+        // ---- article ----
+        server.addRoute(HttpMethod::HTTP_GET, "/api/article/blogHomeGetArticleList/:page/:size", getArticleList);
     }
 }

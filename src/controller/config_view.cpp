@@ -56,7 +56,7 @@ namespace blog_backend::controller
     {
         auto pageHeaderModel = blog_backend::model::PageHeaderModel::getInstance();
         auto cursor = pageHeaderModel->find({});
-        auto result = cpptools::json::JsonArray();
+        auto data = cpptools::json::JsonArray();
         for (auto &doc: cursor.value())
         {
             auto temp = cpptools::json::JsonValue();
@@ -71,9 +71,13 @@ namespace blog_backend::controller
                 }
                 temp[field] = String(doc[field].get_string().value);
             }
-            result.push_back(std::make_shared<cpptools::json::JsonValue>(temp));
+            data.push_back(std::make_shared<cpptools::json::JsonValue>(temp));
         }
         response.setContentType("application/json");
+        auto result = cpptools::json::JsonValue();
+        result["code"] = 200;
+        result["msg"] = "查询成功";
+        result["data"] = std::make_shared<cpptools::json::JsonArray>(data);
         response.write(result.toString());
     }
 }

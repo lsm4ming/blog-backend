@@ -23,6 +23,7 @@ namespace blog_backend::model
     using DeleteResult = mongocxx::stdx::optional<mongocxx::result::delete_result>;
     using FindResult = mongocxx::stdx::optional<mongocxx::cursor>;
     using FindOneResult = mongocxx::stdx::optional<bsoncxx::document::value>;
+    using FindOptions = mongocxx::options::find;
 
     class Model
     {
@@ -66,6 +67,8 @@ namespace blog_backend::model
         FindOneResult findOne(int64_t id);
 
         FindResult findAll();
+
+        FindResult find(const bsoncxx::builder::stream::document &filter, const FindOptions& options);
 
         FindResult find(const bsoncxx::builder::stream::document &filter);
 

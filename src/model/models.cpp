@@ -60,8 +60,7 @@ namespace blog_backend::model
 
     FindResult MongoModel::find(const bsoncxx::builder::stream::document &filter)
     {
-        auto collection = this->getCollection();
-        return collection.find(filter.view());
+        return this->find(filter, FindOptions{});
     }
 
     void MongoModel::customOperator(const Function<void(mongocxx::collection &)> &func)
@@ -80,6 +79,11 @@ namespace blog_backend::model
     {
         auto collection = this->getCollection();
         return collection.insert_many(list.begin(), list.end());
+    }
+
+    FindResult MongoModel::find(const bsoncxx::builder::stream::document &filter, const FindOptions& options)
+    {
+        return this->getCollection().find(filter.view(), options);
     }
 
     bsoncxx::builder::stream::document Model::getModelDocument() const
