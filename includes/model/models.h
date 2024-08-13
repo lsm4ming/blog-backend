@@ -65,6 +65,8 @@ namespace blog_backend::model
 
         FindOneResult findOne(int64_t id);
 
+        FindResult findAll();
+
         FindResult find(const bsoncxx::builder::stream::document &filter);
 
         void customOperator(const Function<void(mongocxx::collection &)> &func);

@@ -53,6 +53,11 @@ namespace blog_backend::model
         return collection.find_one(filter.view());
     }
 
+    FindResult MongoModel::findAll()
+    {
+        return this->find({});
+    }
+
     FindResult MongoModel::find(const bsoncxx::builder::stream::document &filter)
     {
         auto collection = this->getCollection();

@@ -22,7 +22,6 @@ namespace blog_backend::controller
         auto value = statisticModel->findOne(1);
         auto result = cpptools::json::JsonValue();
         response.setContentType("application/json");
-        // mongo bson转结构体
         if (!value)
         {
             result["code"] = 400;
@@ -30,6 +29,7 @@ namespace blog_backend::controller
             response.write(result.toString());
             return;
         }
+        // mongo bson转结构体
         auto doc = value->view();
         result["code"] = 200;
         result["msg"] = "查询成功";
@@ -49,6 +49,31 @@ namespace blog_backend::controller
             data[field] = (int) doc[field].get_int64().value;
         }
         result["data"] = data;
+        response.write(result.toString());
+    }
+
+    void queryPageHeader(cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response)
+    {
+        auto pageHeaderModel = blog_backend::model::PageHeaderModel::getInstance();
+        auto cursor = pageHeaderModel->find({});
+        auto result = cpptools::json::JsonArray();
+        for (auto &doc: cursor.value())
+        {
+            auto temp = cpptools::json::JsonValue();
+            for (auto &field: std::array<String, 2>{
+                    "route_name",
+                    "bg_url"
+            })
+            {
+                if (!doc[field])
+                {
+                    continue;
+                }
+                temp[field] = String(doc[field].get_string().value);
+            }
+            result.push_back(std::make_shared<cpptools::json::JsonValue>(temp));
+        }
+        response.setContentType("application/json");
         response.write(result.toString());
     }
 }

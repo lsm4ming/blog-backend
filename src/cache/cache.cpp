@@ -13,7 +13,6 @@ namespace blog_backend::cache
             connection_options.password = c.redis.password;
         }
         auto client = sw::redis::Redis(connection_options);
-        auto result = client.ping();
-        std::cout << "redis ping:" << result << std::endl;
+        std::cout << "redis ping:" << client.ping() << std::endl;
     }
 }
