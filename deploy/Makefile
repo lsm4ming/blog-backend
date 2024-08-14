@@ -19,9 +19,5 @@ tag:
 run:
 	docker run -d --name $(IMAGE_NAME) -p $(PORT):$(PORT) $(IMAGE_NAME):$(IMAGE_VERSION)
 
-all:
-	stop
-	clear
-	build
-	tag
-	run
+all: stop clear build run
+	@echo "deploy docker successfully"
