@@ -12,5 +12,12 @@ image:
 	conan remote add conan-community "https://mirrors.tuna.tsinghua.edu.cn/artifactory/api/conan/conan-community"
 	conan remote add bincrafters "https://mirrors.tuna.tsinghua.edu.cn/artifactory/api/conan/bincrafters"
 
+build:
+	cd cmake-build-debug && make
+
+deploy: install cmake build
+	@mv cmake-build-debug/blog-backend ./deploy
+	echo "deploy completed successfully"
+
 # clion记得添加Cmake选项参数
 # -DCMAKE_TOOLCHAIN_FILE=./cmake-build-debug/conan_toolchain.cmake
