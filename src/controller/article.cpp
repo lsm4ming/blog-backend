@@ -99,7 +99,7 @@ namespace blog_backend::controller
                 auto tags = cpptools::json::JsonArray();
                 for (auto &tag: array)
                 {
-                    tags.push_back(std::make_shared<cpptools::json::JsonValue>(String(tag.get_string().value)));
+                    tags.push_back(String(tag.get_string().value));
                 }
                 temp["tag_name_list"] = std::make_shared<cpptools::json::JsonArray>(tags);
             }

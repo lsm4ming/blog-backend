@@ -71,13 +71,14 @@ namespace blog_backend::controller
                 }
                 temp[field] = String(doc[field].get_string().value);
             }
-            data.push_back(std::make_shared<cpptools::json::JsonValue>(temp));
+            temp["id"] = (int)doc["id"].get_int64().value;
+            data.push_back(temp);
         }
         response.setContentType("application/json");
         auto result = cpptools::json::JsonValue();
         result["code"] = 200;
-        result["msg"] = "查询成功";
-        result["data"] = std::make_shared<cpptools::json::JsonArray>(data);
+        result["message"] = "查询成功";
+        result["result"] = std::make_shared<cpptools::json::JsonArray>(data);
         response.write(result.toString());
     }
 }

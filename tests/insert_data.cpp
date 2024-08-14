@@ -2,8 +2,8 @@
 #include <cpptools/common/flag.h>
 #include <cpptools/common/config.h>
 #include <cpptools/time/time.h>
-#include "model/defined.h"
 #include "model/page_header.h"
+#include "model/primary_key.h"
 
 constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 
