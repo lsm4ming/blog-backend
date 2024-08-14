@@ -17,6 +17,7 @@ build:
 
 deploy: install cmake build
 	@mv cmake-build-debug/blog-backend ./deploy
+	@cp config/config.ini ./deploy/config.ini
 	@echo "deploy build successfully"
 	make -C deploy
 
