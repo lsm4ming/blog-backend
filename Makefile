@@ -18,7 +18,7 @@ build:
 deploy: install cmake build
 	@mv cmake-build-debug/blog-backend ./deploy
 	@echo "deploy build successfully"
-	make -c deploy
+	make -C deploy
 
 # clion记得添加Cmake选项参数
 # -DCMAKE_TOOLCHAIN_FILE=./cmake-build-debug/conan_toolchain.cmake
