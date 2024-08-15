@@ -25,11 +25,9 @@ find_package(mongocxx REQUIRED)
 find_package(libmysqlclient REQUIRED)
 # 导入redis驱动
 find_package(redis++ REQUIRED)
-# 导入zookeeper
-find_package(zookeeper-client-c REQUIRED)
 
-target_link_libraries(blog-backend cpptools mongo::mongocxx_static libmysqlclient::libmysqlclient redis++::redis++_static zookeeper-client-c::zookeeper-client-c)
+target_link_libraries(blog-backend cpptools mongo::mongocxx_static libmysqlclient::libmysqlclient redis++::redis++_static)
 
 add_executable(insert-data-test tests/insert_data.cpp ${CPP_SOURCES})
 
-target_link_libraries(insert-data-test cpptools mongo::mongocxx_static libmysqlclient::libmysqlclient redis++::redis++_static zookeeper-client-c::zookeeper-client-c)
+target_link_libraries(insert-data-test cpptools mongo::mongocxx_static libmysqlclient::libmysqlclient redis++::redis++_static)

@@ -21,6 +21,7 @@ void usage()
 
 int main(int argc, char *argv[])
 {
+    // cpptools::log::LOG_LEVEL(cpptools::log::DEBUG);
     String cfgPath;
     SetUsage(usage);
     StrOpt(&cfgPath, "c", DEFAULT_CONFIG_PATH);
