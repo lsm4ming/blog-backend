@@ -1,6 +1,7 @@
 #ifndef BLOG_BACKEND_HTTP_HANDLER_H
 #define BLOG_BACKEND_HTTP_HANDLER_H
 
+#include <cpptools/log/log.h>
 #include <cpptools/http/server_request.h>
 #include <cpptools/http/response_writer.h>
 
