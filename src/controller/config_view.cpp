@@ -75,6 +75,10 @@ namespace blog_backend::controller
             data.push_back(temp);
         }
         response.setContentType("application/json");
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "GET,HEAD,POST,PUT,DELETE,OPTIONS");
+        response.addHeader("Access-Control-Allow-Headers", "*");
+
         auto result = cpptools::json::JsonValue();
         result["code"] = 200;
         result["message"] = "查询成功";
