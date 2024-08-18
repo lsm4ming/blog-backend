@@ -14,6 +14,8 @@ namespace blog_backend::controller
     extern void queryStatistic(cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response);
 
     extern void queryPageHeader(cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response);
+
+    extern void queryConfig(cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response);
 }
 
 #endif //BLOG_BACKEND_CONFIG_VIEW_H

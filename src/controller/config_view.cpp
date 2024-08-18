@@ -85,4 +85,9 @@ namespace blog_backend::controller
         result["result"] = std::make_shared<cpptools::json::JsonArray>(data);
         response.write(result.toString());
     }
+
+    void queryConfig(cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response)
+    {
+
+    }
 }
