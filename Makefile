@@ -18,8 +18,14 @@ build:
 deploy: install cmake build
 	@mv cmake-build-debug/blog-backend ./deploy
 	@cp config/config.ini ./deploy/config.ini
-	@echo "deploy build successfully"
-	make -C deploy
+	@echo "deploy build successfully 开始"
+	make -C deploy stop || true
+	make -C deploy clear || true
+	make -C deploy build
+	make -C deploy run
+	@echo "deploy build successfully 结束"
 
 # clion记得添加Cmake选项参数
 # -DCMAKE_TOOLCHAIN_FILE=./cmake-build-debug/conan_toolchain.cmake
+
+.PHONY: profile install cmake build deploy

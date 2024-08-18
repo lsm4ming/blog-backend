@@ -4,6 +4,7 @@ namespace blog_backend::controller
 {
     void ping(const cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response)
     {
+        cpptools::log::LOG_INFO("收到一次");
         response.setContentType("application/json");
         response.write(
                 "{"
