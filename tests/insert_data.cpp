@@ -4,6 +4,7 @@
 #include <cpptools/time/time.h>
 #include "model/page_header.h"
 #include "model/primary_key.h"
+#include "model/config.h"
 
 constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 
@@ -47,6 +48,32 @@ void insertPageHeader()
     }
 }
 
+void insertBaseConfig()
+{
+    auto pkModel = blog_backend::model::PrimaryKeyModel::getInstance();
+    auto baseConfigModel = blog_backend::model::BaseConfigModel::getInstance();
+    blog_backend::model::BaseConfig config;
+    String now = cpptools::time::Time::now().format("%Y-%m-%d %H:%M:%S");
+    config.id = pkModel->generateId(baseConfigModel->tableName());
+    config.createdAt = now;
+    config.updatedAt = now;
+    config.aliPay = "";
+    config.avatarBg = "";
+    config.qqLink = "https://cdn.lsm1998.com/blog/3f589106152f484f8faa44decd1a2077.jpg";
+    config.weChatLink = "https://cdn.lsm1998.com/blog/02fbed77ae714a0797a8d3b65ef05c6f.jpg";
+    config.blogAvatar = "";
+    config.gitEeLink = "https://gitee.com/lsm1998_admin";
+    config.githubLink = "https://github.com/lsm1998";
+    config.personalSay = "为什么每天不能睡25个小时啊。";
+    config.blogNotice ="博客公告";
+    config.blogName = "lsm1998的博客";
+    config.viewTime = 0;
+    config.weChatGroup = "";
+    config.qqGroup = "";
+    config.weChatPay = "";
+    baseConfigModel->insert(config);
+}
+
 int main(int argc, char *argv[])
 {
     String cfgPath;
@@ -66,5 +93,7 @@ int main(int argc, char *argv[])
     }
     auto &c = blog_backend::config::getConfig();
     blog_backend::model::initMongodb(c);
+
+    // insertBaseConfig();
     return 0;
 }

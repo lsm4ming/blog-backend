@@ -1,4 +1,6 @@
 #include "config/config.h"
+#include "model/config.h"
+
 
 namespace blog_backend::config
 {

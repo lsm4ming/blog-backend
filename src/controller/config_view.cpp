@@ -71,18 +71,61 @@ namespace blog_backend::controller
                 }
                 temp[field] = String(doc[field].get_string().value);
             }
-            temp["id"] = (int)doc["id"].get_int64().value;
+            temp["id"] = (int) doc["id"].get_int64().value;
             data.push_back(temp);
         }
         response.setContentType("application/json");
-        response.addHeader("Access-Control-Allow-Origin", "*");
-        response.addHeader("Access-Control-Allow-Methods", "GET,HEAD,POST,PUT,DELETE,OPTIONS");
-        response.addHeader("Access-Control-Allow-Headers", "*");
-
         auto result = cpptools::json::JsonValue();
         result["code"] = 200;
         result["message"] = "查询成功";
         result["result"] = std::make_shared<cpptools::json::JsonArray>(data);
+        response.write(result.toString());
+    }
+
+    void queryBaseConfig(cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response)
+    {
+        auto baseConfigModel = blog_backend::model::BaseConfigModel::getInstance();
+
+        auto record = baseConfigModel->findOne(1);
+        auto result = cpptools::json::JsonValue();
+        response.setContentType("application/json");
+        if (record)
+        {
+            auto doc = record->view();
+            auto stringField = {
+                    "blog_name",
+                    "blog_avatar",
+                    "avatar_bg",
+                    "personal_say",
+                    "blog_notice",
+                    "qq_link",
+                    "we_chat_link",
+                    "github_link",
+                    "gitee_link",
+                    "bilibili_link",
+                    "we_chat_group",
+                    "qq_group",
+                    "we_chat_pay",
+                    "ali_pay",
+                    "git_ee_link",
+            };
+            auto config = cpptools::json::JsonValue();
+            for (auto &key: stringField)
+            {
+                if (!doc[key])
+                {
+                    continue;
+                }
+                config[key] = String(doc[key].get_string().value);
+            }
+            config["view_time"] = doc["view_time"].get_int32().value;
+            config["id"] = (int) doc["id"].get_int64().value;
+            config["createdAt"] = "";
+            config["updatedAt"] = "";
+            result["result"] = config;
+        }
+        result["code"] = 200;
+        result["message"] = "查询成功";
         response.write(result.toString());
     }
 }

@@ -81,7 +81,7 @@ namespace blog_backend::model
         return collection.insert_many(list.begin(), list.end());
     }
 
-    FindResult MongoModel::find(const bsoncxx::builder::stream::document &filter, const FindOptions& options)
+    FindResult MongoModel::find(const bsoncxx::builder::stream::document &filter, const FindOptions &options)
     {
         return this->getCollection().find(filter.view(), options);
     }
@@ -97,6 +97,10 @@ namespace blog_backend::model
 
     bsoncxx::types::b_date Model::convertStringToBdate(const String &date)
     {
+        if (date.empty())
+        {
+            return bsoncxx::types::b_date(std::chrono::milliseconds(0));
+        }
         std::tm tm = {};
         std::istringstream ss(date);
         ss >> std::get_time(&tm, "%Y-%m-%d %H:%M:%S");
