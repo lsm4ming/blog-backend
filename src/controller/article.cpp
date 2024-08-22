@@ -107,9 +107,18 @@ namespace blog_backend::controller
         }
         response.setContentType("application/json");
         auto result = cpptools::json::JsonValue();
-        result["code"] = 200;
-        result["msg"] = "查询成功";
-        result["data"] = std::make_shared<cpptools::json::JsonArray>(data);
+        result["code"] = 0;
+        result["message"] = "查询成功";
+        result["result"] = std::make_shared<cpptools::json::JsonArray>(data);
+        response.write(result.toString());
+    }
+
+    void queryHotArticle(cpptools::http::Request &request, cpptools::http::HttpResponseWriter &response)
+    {
+        response.setContentType("application/json");
+        auto result = cpptools::json::JsonValue();
+        result["code"] = 0;
+        result["message"] = "查询成功";
         response.write(result.toString());
     }
 }

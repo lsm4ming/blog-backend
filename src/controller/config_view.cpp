@@ -11,8 +11,8 @@ namespace blog_backend::controller
         statisticModel->incrementStatistic(statistic);
         response.setContentType("application/json");
         auto result = cpptools::json::JsonValue();
-        result["code"] = 200;
-        result["msg"] = "操作成功";
+        result["code"] = 0;
+        result["message"] = "操作成功";
         response.write(result.toString());
     }
 
@@ -25,14 +25,14 @@ namespace blog_backend::controller
         if (!value)
         {
             result["code"] = 400;
-            result["msg"] = "查询失败";
+            result["message"] = "查询失败";
             response.write(result.toString());
             return;
         }
         // mongo bson转结构体
         auto doc = value->view();
-        result["code"] = 200;
-        result["msg"] = "查询成功";
+        result["code"] = 0;
+        result["message"] = "查询成功";
         auto data = cpptools::json::JsonValue();
         for (auto &field: std::array<String, 5>{
                 "visit_count",
@@ -48,7 +48,7 @@ namespace blog_backend::controller
             }
             data[field] = (int) doc[field].get_int64().value;
         }
-        result["data"] = data;
+        result["result"] = data;
         response.write(result.toString());
     }
 
@@ -76,7 +76,7 @@ namespace blog_backend::controller
         }
         response.setContentType("application/json");
         auto result = cpptools::json::JsonValue();
-        result["code"] = 200;
+        result["code"] = 0;
         result["message"] = "查询成功";
         result["result"] = std::make_shared<cpptools::json::JsonArray>(data);
         response.write(result.toString());
@@ -124,7 +124,7 @@ namespace blog_backend::controller
             config["updatedAt"] = "";
             result["result"] = config;
         }
-        result["code"] = 200;
+        result["code"] = 0;
         result["message"] = "查询成功";
         response.write(result.toString());
     }

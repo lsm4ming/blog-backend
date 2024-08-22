@@ -27,6 +27,7 @@ namespace blog_backend::controller
 
         // ---- article ----
         server.addRoute(HttpMethod::HTTP_GET, "/api/article/blogHomeGetArticleList/:page/:size", getArticleList);
+        server.addRoute(HttpMethod::HTTP_GET, "/api/article/getHotArticle", queryHotArticle);
 
         // ---- tag ----
         server.addRoute(HttpMethod::HTTP_GET, "/api/tag/getTagDictionary", queryTagDictionary);

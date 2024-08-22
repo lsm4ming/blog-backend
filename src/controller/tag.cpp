@@ -18,7 +18,7 @@ namespace blog_backend::controller
         }
         result["result"] = std::make_shared<cpptools::json::JsonArray>(data);
         result["message"] = "查询成功";
-        result["code"] = 200;
+        result["code"] = 0;
         response.write(result.toString());
     }
 }

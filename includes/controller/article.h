@@ -8,4 +8,6 @@
 namespace blog_backend::controller
 {
     extern void getArticleList(cpptools::http::Request& request, cpptools::http::HttpResponseWriter& response);
+
+    extern void queryHotArticle(cpptools::http::Request& request, cpptools::http::HttpResponseWriter& response);
 }
