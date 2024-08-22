@@ -4,6 +4,7 @@
 #include "http_handler.h"
 #include "config_view.h"
 #include "article.h"
+#include "tag.h"
 
 using namespace cpptools::http;
 

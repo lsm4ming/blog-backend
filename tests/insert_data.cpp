@@ -5,6 +5,7 @@
 #include "model/page_header.h"
 #include "model/primary_key.h"
 #include "model/config.h"
+#include "model/tag_dictionary.h"
 
 constexpr const char *DEFAULT_CONFIG_PATH = "config/config.ini";
 
@@ -65,13 +66,103 @@ void insertBaseConfig()
     config.gitEeLink = "https://gitee.com/lsm1998_admin";
     config.githubLink = "https://github.com/lsm1998";
     config.personalSay = "为什么每天不能睡25个小时啊。";
-    config.blogNotice ="博客公告";
+    config.blogNotice = "博客公告";
     config.blogName = "lsm1998的博客";
     config.viewTime = 0;
     config.weChatGroup = "";
     config.qqGroup = "";
     config.weChatPay = "";
     baseConfigModel->insert(config);
+}
+
+void insertTagDictionary()
+{
+    auto pTagDictionaryModel = blog_backend::model::TagDictionaryModel::getInstance();
+    // {
+    //      "id": 17,
+    //      "tag_name": "axios"
+    //    },
+    //    {
+    //      "id": 14,
+    //      "tag_name": ""
+    //    },
+    //    {
+    //      "id": 16,
+    //      "tag_name": "hooks"
+    //    },
+    //    {
+    //      "id": 18,
+    //      "tag_name": "javascript"
+    //    },
+    //    {
+    //      "id": 6,
+    //      "tag_name": "linux"
+    //    },
+    //    {
+    //      "id": 21,
+    //      "tag_name": "node"
+    //    },
+    //    {
+    //      "id": 19,
+    //      "tag_name": "pinia"
+    //    },
+    //    {
+    //      "id": 22,
+    //      "tag_name": "Promise"
+    //    },
+    //    {
+    //      "id": 13,
+    //      "tag_name": ""
+    //    },
+    //    {
+    //      "id": 11,
+    //      "tag_name": ""
+    //    },
+    //    {
+    //      "id": 15,
+    //      "tag_name": "svg"
+    //    },
+    //    {
+    //      "id": 12,
+    //      "tag_name": ""
+    //    },
+    //    {
+    //      "id": 20,
+    //      "tag_name": "websocket"
+    //    },
+    SortMap<int64_t, String> dataMap = {
+            std::pair<int64_t, String>(1, "git"),
+            std::pair<int64_t, String>(2, "vue2"),
+            std::pair<int64_t, String>(3, "keepAlive"),
+            std::pair<int64_t, String>(4, "vue3"),
+            std::pair<int64_t, String>(5, "gzip"),
+            std::pair<int64_t, String>(6, "Go"),
+            std::pair<int64_t, String>(7, "阿里云轻量服务器"),
+            std::pair<int64_t, String>(8, "finalShell"),
+            std::pair<int64_t, String>(9, "宝塔面板"),
+            std::pair<int64_t, String>(10, "node版本控制"),
+            std::pair<int64_t, String>(11, "react-router"),
+            std::pair<int64_t, String>(12, "typescript"),
+            std::pair<int64_t, String>(13, "react"),
+            std::pair<int64_t, String>(14, "css动画"),
+            std::pair<int64_t, String>(15, "svg"),
+            std::pair<int64_t, String>(16, "hooks"),
+            std::pair<int64_t, String>(17, "axios"),
+            std::pair<int64_t, String>(18, "javascript"),
+            std::pair<int64_t, String>(19, "pinia"),
+            std::pair<int64_t, String>(20, "websocket"),
+            std::pair<int64_t, String>(21, "node"),
+            std::pair<int64_t, String>(22, "Promise"),
+    };
+
+    for (auto &[k, v]: dataMap)
+    {
+        auto record = blog_backend::model::TagDictionary();
+        record.id = k;
+        record.tagName = v;
+        pTagDictionaryModel->insert(record);
+        std::cout << "写入一条" << std::endl;
+    }
 }
 
 int main(int argc, char *argv[])
@@ -95,5 +186,6 @@ int main(int argc, char *argv[])
     blog_backend::model::initMongodb(c);
 
     // insertBaseConfig();
+    insertTagDictionary();
     return 0;
 }
